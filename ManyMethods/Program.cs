@@ -10,6 +10,7 @@ namespace ManyMethods
     {
         static void Main(string[] args)
         {
+        
         }
 
         public static void Hello()
@@ -104,9 +105,11 @@ namespace ManyMethods
         {
             Console.WriteLine("Please enter your birthyear.");
             int birthyear = int.Parse(Console.ReadLine());
-            string today = DateTtime
-            int age = 2019 - birthyear;
+            string today = DateTime.Now.ToString("yyyy");
+            int year = int.Parse(today);
+            int age = year - birthyear;
             Console.WriteLine("You are " + age + " years old.");
+            Console.ReadLine();
         }
 
         public static void Guess()
