@@ -10,7 +10,16 @@ namespace ManyMethods
     {
         static void Main(string[] args)
         {
-        
+        Hello();
+        Addition();
+        CatDog();
+        OddEven();
+        Inches();
+        Echo();
+        KiloGram();
+        Date();
+        Age();
+        Guess();
         }
 
         public static void Hello()

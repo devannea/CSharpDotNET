@@ -14,14 +14,48 @@ namespace PigLatin
         }
 
         // pig latin function goes here
-        public static void PigLatin()
+        public static void PigLatin(string word)
         {
-            Console.WriteLine("Please enter a word or phrase that you would like to have translated to PigLatin.");
-            string english = Console.ReadLine();
-            string piglatin = english;
-            Console.WriteLine("Translation: " + piglatin);
-            Console.ReadLine();
+            char[] vowels = { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
+            bool startWithVowel = false;
+            bool endWithVowel = false;
+            bool foundVowel = false;
+            string currentVowel = "";
+            for (int i = 0; i < vowels.Length - 1; i++)
+            {
+                string currentVowel = vowels[i].ToString();
+                if(word.StartsWith(currentVowel))
+                {
+                    startWithVowel = true;
+                    break;
+                }
+            }
+            for (int i = 0; i < vowels.Length - 1; i++)
+            {
+                string currentVowel = vowels[i].ToString();
+                if (word.EndsWith(currentVowel))
+                {
+                    endWithVowel = true;
+                    break;
+                }
+            }
+            for (int i = 0; i < vowels.Length - 1; i++)
+            {
+                string currentVowel = vowels[i].ToString();
+                if (word.IndexOfAny(vowels)>=1)
+                {
+                    foundVowel = true;
+                }
+                StringBuilder sb = new StringBuilder();
+                if(startWithVowel && endWithVowel)
+                {
+                    return (word + "yay");
+                }
+                if (!foundVowel)
+                {
+                    return (word + "ay");
+                }
+            }
         }
-
     }
 }
