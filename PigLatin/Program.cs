@@ -8,54 +8,47 @@ namespace PigLatin
 {
     class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
-        PigLatin();
+            Console.Write("Enter a word: ");
+            string input = Console.ReadLine();
+            /* 1. Translate English to Pig Latin
+            string convertedWord = ToPigLatin(input);
+            Console.WriteLine(convertedWord);
+            Console.Read();
+            */
+            ToPigLatin(input);
+            Console.Read();
         }
-
-        // pig latin function goes here
-        public static void PigLatin(string word)
+        public static string ToPigLatin(string word)
         {
             char[] vowels = { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
-            bool startWithVowel = false;
-            bool endWithVowel = false;
-            bool foundVowel = false;
-            string currentVowel = "";
-            for (int i = 0; i < vowels.Length - 1; i++)
+
+            int firstVowelPosition = word.IndexOfAny(vowels);
+            if (firstVowelPosition == -1)  // check for vowel
             {
-                string currentVowel = vowels[i].ToString();
-                if(word.StartsWith(currentVowel))
-                {
-                    startWithVowel = true;
-                    break;
-                }
+                return (word + "ay");
             }
-            for (int i = 0; i < vowels.Length - 1; i++)
+            else
             {
-                string currentVowel = vowels[i].ToString();
-                if (word.EndsWith(currentVowel))
-                {
-                    endWithVowel = true;
-                    break;
-                }
-            }
-            for (int i = 0; i < vowels.Length - 1; i++)
-            {
-                string currentVowel = vowels[i].ToString();
-                if (word.IndexOfAny(vowels)>=1)
-                {
-                    foundVowel = true;
-                }
-                StringBuilder sb = new StringBuilder();
-                if(startWithVowel && endWithVowel)
+                char firstLetter = word[0]; // first letter
+                char lastLetter = word[word.Length - 1]; // last letter
+                //word starts with a vowel && ends in a vowel, add "yay"
+                if (vowels.Contains(firstLetter) && vowels.Contains(lastLetter))
                 {
                     return (word + "yay");
                 }
-                if (!foundVowel)
+                else
                 {
-                    return (word + "ay");
+                    // first letter is not a vowel || last letter is not a vowel
+                    // split the word at the first vowel 
+                    string firstHalf = word.Substring(0, firstVowelPosition);
+                    string secondHalf = word.Substring(firstVowelPosition);
+                    return (secondHalf + firstHalf + "ay");
                 }
+
             }
+
         }
     }
 }
