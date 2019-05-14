@@ -18,7 +18,7 @@ namespace RockPaperScissors
             //Initial score
             int PlayerScore = 0;
             int ComputerScore = 0;
-
+            //Restart here
             while(true)
             {
                 Console.WriteLine("Choose your hand."); //Player chooses hand
