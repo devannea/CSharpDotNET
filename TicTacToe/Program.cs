@@ -23,6 +23,16 @@ namespace TicTacToe
             Console.Read();
         }
 
+        public static void ResetBoard()
+        {
+            PrintBoard();
+        }
+
+        public static void StartGame()
+        {
+            PlaceMark();
+        }
+
         #region Print the game board
         static void PrintBoard()
         {
@@ -47,16 +57,7 @@ namespace TicTacToe
             int ColIdx = ColPos - 1;
             board[RowIdx, ColIdx] = CurrentPlayer;
             PrintBoard();
-        }
 
-        public static void ResetBoard()
-        {
-            PrintBoard();
-        }
-
-        public static void StartGame()
-        {
-            PlaceMark();
         }
 
     }
