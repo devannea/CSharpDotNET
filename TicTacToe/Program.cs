@@ -11,10 +11,9 @@ namespace TicTacToe
 
         static string CurrentPlayer = " ";
         const int BoardSize = 3;
-        // initialize board
-        static string[,] board = new string[BoardSize, BoardSize] { { " ", " ", " " }, { " ", " ", " " }, { " ", " ", " " } };
-        // static int TotalMoves = 0;
-        // static bool GameOver = false;
+        static string[,] board = new string[BoardSize, BoardSize] { { " ", " ", " " }, { " ", " ", " " }, { " ", " ", " " } }; // initialize board
+        static int TotalMoves = 0;
+        static bool GameOver = false;
 
         static void Main(string[] args)
         {
@@ -53,10 +52,43 @@ namespace TicTacToe
 
         static void PlaceMark(int RowPos, int ColPos)
         {
+            if (RowPos < 1 || RowPos > BoardSize || ColPos < 1 || ColPos > BoardSize)
+            {
+                Console.WriteLine($"Invalid row position or column position. Please check your input and try again.");
+                return;
+            }
             int RowIdx = RowPos - 1;
             int ColIdx = ColPos - 1;
-            board[RowIdx, ColIdx] = CurrentPlayer;
-            PrintBoard();
+            if (board[RowIdx, ColIdx] == " ")
+            {
+                board[RowIdx, ColIdx] = CurrentPlayer;
+            }
+            else
+            {
+                Console.WriteLine("That spot has already been marked. Please choose another spot.");
+                StartGame();
+            }
+            TotalMoves++;
+            //if (HasWon())
+            //{
+                //GameOver = true;
+            //}
+            //else if (IsTie())
+            //{
+                //GameOver = true;
+            //}
+            //else
+            //{
+                //if (CurrentPlayer == "X")
+                //{
+                    //CurrentPlayer = "O";
+                //}
+                //else
+                //{
+                    //CurrentPlayer = "X";
+                //}
+            //}
+            //PrintBoard();
 
         }
 
