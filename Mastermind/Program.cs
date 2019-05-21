@@ -10,13 +10,14 @@ namespace Mastermind
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Mastermind!");
+            Console.WriteLine("> Welcome to Mastermind!");
             Start();
             Console.Read();
         }
 
         static void Start()
         {
+            // 1. Generate random colors
             Random generator = new Random();
             int firstNumber = generator.Next(0, 3); // Computer chooses a random number between 0 and 2
             int secondNumber = generator.Next(0, 3); // Same as ^
@@ -50,9 +51,10 @@ namespace Mastermind
                Used this line to make sure that Random() was working
                Random() successfully generates two random colors
             */
+            // 2. Player guesses random colors
             while (true)
-            { // loop start
-                Console.WriteLine("Please enter your guess: ");
+            {   // loop start
+                Console.WriteLine("> Please enter your guess: ");
                 string guess = Console.ReadLine().ToLower();
                 string[] words = guess.Split(' ');
                 string firstGuess = words[0];
@@ -60,14 +62,62 @@ namespace Mastermind
                 /* Console.WriteLine("The first color you guessed was " + firstGuess + " and the second color you guessed was " + secondGuess + ".");
                    Used this to make sure that the string guess was split into two variables - firstGuess and secondGuess */
                 string[] colorArray = { "red", "yellow", "blue" };
-                
+                if (firstGuess != "red" && firstGuess != "yellow" && firstGuess != "blue")
                 {
-                    Console.WriteLine("You have entered an incorrect response. You can only guess red, yellow, or blue.");
+                    Console.WriteLine("> You have entered an incorrect response. You can only guess red, yellow, or blue.");
+                    continue;
                 } // This will prevent the player from entering anything that is not red, yellow, or blue
                 if (firstColor != firstGuess && secondColor != secondGuess)
                 {
-                    Console.WriteLine("Hint: 0:0"); // Player guessed both colors and positions incorrectly
-                    break;
+                    Console.WriteLine("> Hint: 0:0"); // Player guessed both colors and positions incorrectly
+                    continue;
+                }
+                if (firstColor != firstGuess && secondColor == firstGuess)
+                {
+                    Console.WriteLine("> Hint: 1:0"); // Player guessed one color correctly in the wrong position
+                    continue;
+                }
+                if (firstColor == secondGuess && secondColor != secondGuess)
+                {
+                    Console.WriteLine("> Hint: 1:0"); // Player guessed one color correctly in the wrong position
+                    continue;
+                }
+                if (firstColor != firstGuess && secondColor == secondGuess)
+                {
+                    Console.WriteLine("> Hint: 0:1"); // Player guessed one color correctly in the correct position
+                    continue;
+                }
+                if (firstColor == firstGuess && secondColor != secondGuess)
+                {
+                    Console.WriteLine("> Hint: 0:1"); // Player guessed one color correctly in the correct position
+                    continue;
+                }
+                if (firstColor == secondGuess && secondColor == firstGuess && firstColor != firstGuess && secondColor != secondGuess)
+                {
+                    Console.WriteLine("> Hint: 2:0"); // Player guessed both colors; but in the wrong positions
+                    continue;
+                }
+                if (firstColor == firstGuess && secondColor == secondGuess)
+                {
+                    Console.WriteLine("> You won! :D"); // Player guessed both colors in the correct positions
+                    Console.WriteLine("> Do you want to play again? Enter Yes or No.");
+                    string playAgain = Console.ReadLine().ToLower();
+                    while (true)
+                    {
+                        if (playAgain == "yes")
+                        {
+                            Start();
+                        }
+                        if (playAgain == "no")
+                        {
+                            Environment.Exit(0);
+                        }
+                        else
+                        {
+                            Console.WriteLine("> You did not enter a proper response. Please enter Yes or No.");
+                            continue;
+                        }
+                    }
                 }
             } // loop end
         }        
