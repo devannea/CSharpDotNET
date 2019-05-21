@@ -55,10 +55,10 @@ namespace Mastermind
             while (true)
             {   // loop start
                 Console.WriteLine("> Please enter your guess: ");
-                string guess = Console.ReadLine().ToLower();
-                string[] words = guess.Split(' ');
-                string firstGuess = words[0];
-                string secondGuess = words[1];
+                string guess = Console.ReadLine().ToLower(); // Player's guess
+                string[] words = guess.Split(' '); // Splits guess where space is
+                string firstGuess = words[0]; // first word becomes firstGuess
+                string secondGuess = words[1]; // second word becomes secondGuess
                 /* Console.WriteLine("The first color you guessed was " + firstGuess + " and the second color you guessed was " + secondGuess + ".");
                    Used this to make sure that the string guess was split into two variables - firstGuess and secondGuess */
                 string[] colorArray = { "red", "yellow", "blue" };
