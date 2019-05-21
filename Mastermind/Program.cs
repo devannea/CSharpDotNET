@@ -62,39 +62,24 @@ namespace Mastermind
                 /* Console.WriteLine("The first color you guessed was " + firstGuess + " and the second color you guessed was " + secondGuess + ".");
                    Used this to make sure that the string guess was split into two variables - firstGuess and secondGuess */
                 string[] colorArray = { "red", "yellow", "blue" };
-                if (firstGuess != "red" && firstGuess != "yellow" && firstGuess != "blue")
+                if (firstGuess != "red" && firstGuess != "yellow" && firstGuess != "blue" && secondGuess != "red" && secondGuess != "yellow" && secondGuess != "blue")
                 {
                     Console.WriteLine("> You have entered an incorrect response. You can only guess red, yellow, or blue.");
                     continue;
                 } // This will prevent the player from entering anything that is not red, yellow, or blue
-                if (firstColor != firstGuess && secondColor != secondGuess)
+                if (firstColor != firstGuess && firstColor != secondGuess && secondColor != firstGuess && secondColor != secondGuess)
                 {
-                    Console.WriteLine("> Hint: 0:0"); // Player guessed both colors and positions incorrectly
+                    Console.WriteLine("> Hint: 0-0"); // Player guessed both colors and positions incorrectly
                     continue;
                 }
-                if (firstColor != firstGuess && secondColor == firstGuess)
+                if (firstColor != firstGuess && firstColor == secondGuess && secondColor != firstGuess && secondColor != secondGuess)
                 {
-                    Console.WriteLine("> Hint: 1:0"); // Player guessed one color correctly in the wrong position
+                    Console.WriteLine("> Hint: 1-0"); // Player guessed one color correctly but in the wrong position
                     continue;
                 }
-                if (firstColor == secondGuess && secondColor != secondGuess)
+                if (firstColor != firstGuess && firstColor != secondGuess && secondColor == firstGuess && secondColor != secondGuess)
                 {
-                    Console.WriteLine("> Hint: 1:0"); // Player guessed one color correctly in the wrong position
-                    continue;
-                }
-                if (firstColor != firstGuess && secondColor == secondGuess)
-                {
-                    Console.WriteLine("> Hint: 0:1"); // Player guessed one color correctly in the correct position
-                    continue;
-                }
-                if (firstColor == firstGuess && secondColor != secondGuess)
-                {
-                    Console.WriteLine("> Hint: 0:1"); // Player guessed one color correctly in the correct position
-                    continue;
-                }
-                if (firstColor == secondGuess && secondColor == firstGuess && firstColor != firstGuess && secondColor != secondGuess)
-                {
-                    Console.WriteLine("> Hint: 2:0"); // Player guessed both colors; but in the wrong positions
+                    Console.WriteLine("> Hint: 1-0"); // Player guessed one color correctly but in the wrong position
                     continue;
                 }
                 if (firstColor == firstGuess && secondColor == secondGuess)
@@ -103,21 +88,21 @@ namespace Mastermind
                     Console.WriteLine("> Do you want to play again? Enter Yes or No.");
                     string playAgain = Console.ReadLine().ToLower();
                     while (true)
-                    {
+                    { // loop start for play again options
                         if (playAgain == "yes")
                         {
-                            Start();
+                            Start(); // game starts over again
                         }
                         if (playAgain == "no")
                         {
-                            Environment.Exit(0);
+                            Environment.Exit(0); // application closes
                         }
                         else
                         {
                             Console.WriteLine("> You did not enter a proper response. Please enter Yes or No.");
-                            continue;
+                            continue; // goes to start of loop to get proper response
                         }
-                    }
+                    } // loop end for play again options
                 }
             } // loop end
         }        
