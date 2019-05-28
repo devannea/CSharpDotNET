@@ -67,24 +67,58 @@ namespace Mastermind
                     Console.WriteLine("> You have entered an incorrect response. You can only guess red, yellow, or blue.");
                     continue;
                 } // This will prevent the player from entering anything that is not red, yellow, or blue
+                // Computer generates two colors, player guess both incorrectly
                 if (firstColor != firstGuess && firstColor != secondGuess && secondColor != firstGuess && secondColor != secondGuess)
                 {
-                    Console.WriteLine("> Hint: 0-0"); // Player guessed both colors and positions incorrectly
+                    Console.WriteLine("> Hint: 0-0");
                     continue;
                 }
-                if (firstColor != firstGuess && firstColor == secondGuess && secondColor != firstGuess && secondColor != secondGuess)
+                // Computer generates two colors that are the same, player guesses the first one correctly in the correct position
+                if (firstColor == secondColor && firstColor == firstGuess && firstGuess != secondGuess && secondColor != firstGuess && secondColor != secondGuess)
                 {
-                    Console.WriteLine("> Hint: 1-0"); // Player guessed one color correctly but in the wrong position
+                    Console.WriteLine("> Hint: 0-1");
                     continue;
                 }
-                if (firstColor != firstGuess && firstColor != secondGuess && secondColor == firstGuess && secondColor != secondGuess)
+                // Computer generates two colors that are the same, player guesses the second one correctly in the correct position
+                if (firstColor == secondColor && firstColor != firstGuess && firstColor != secondGuess && secondColor != firstGuess && secondColor == secondGuess)
                 {
-                    Console.WriteLine("> Hint: 1-0"); // Player guessed one color correctly but in the wrong position
+                    Console.WriteLine("> Hint: 0-1");
                     continue;
                 }
+                // Computer generates two colors that are not the same, player guesses the first one correctly in the wrong position
+                if (firstColor != secondColor && firstColor != firstGuess && firstColor == secondGuess && secondColor != firstGuess && secondColor != secondGuess)
+                {
+                    Console.WriteLine("> Hint: 1-0");
+                    continue;
+                }
+                // Computer generates two colors that are not the same, player guesses the second one correctly in the wrong position
+                if (firstColor != secondColor && firstColor != firstGuess && firstColor != secondGuess && secondColor == firstGuess && secondColor != secondGuess)
+                {
+                    Console.WriteLine("> Hint: 1-0");
+                    continue;
+                }
+                // Computer generates two colors that are not the same, player guesses the first one correctly in the correct position
+                if (firstColor != secondColor && firstColor == firstGuess && firstColor != secondGuess && secondColor != firstGuess && secondColor != secondGuess)
+                {
+                    Console.WriteLine("> Hint: 0-1");
+                    continue;
+                }
+                // Computer generates two colors that are not the same, player guesses the second one correctly in the correct position
+                if (firstColor != secondColor && firstColor != firstGuess && firstColor != secondGuess && secondColor != firstGuess && secondColor == secondGuess)
+                {
+                    Console.WriteLine("> Hint: 0-1");
+                    continue;
+                }
+                // Computer generates two colors that are not the same, player guesses both colors correctly in the wrong positions
+                if (firstColor != secondColor && firstColor != firstGuess && firstColor == secondGuess && secondColor == firstGuess && secondColor != secondGuess)
+                {
+                    Console.WriteLine("> Hint: 2-0");
+                    continue;
+                }
+                // Player guesses both colors correctly
                 if (firstColor == firstGuess && secondColor == secondGuess)
                 {
-                    Console.WriteLine("> You won! :D"); // Player guessed both colors in the correct positions
+                    Console.WriteLine("> You won! :D");
                     Console.WriteLine("> Do you want to play again? Enter Yes or No.");
                     string playAgain = Console.ReadLine().ToLower();
                     while (true)
