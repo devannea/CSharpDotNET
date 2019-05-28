@@ -138,7 +138,7 @@ namespace Mastermind
                         }
                     } // loop end for play again options
                 }
-            } // loop end
+            } // end of loop
         }        
     }
 }
