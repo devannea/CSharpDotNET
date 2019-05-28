@@ -34,6 +34,5 @@ namespace TowerHanoi
             Console.WriteLine("B: { }");
             Console.WriteLine("C: { }");
         }
-
     }
 }
