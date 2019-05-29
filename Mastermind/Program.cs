@@ -8,6 +8,11 @@ namespace Mastermind
 {
     class Program
     {
+
+        static string[] trueColor = new string[3];
+        static string[] colorArray = new string[] { "red", "yellow", "blue" };
+        static bool gameOver = false;
+
         static void Main(string[] args)
         {
             Console.WriteLine("> Welcome to Mastermind!");
@@ -17,128 +22,104 @@ namespace Mastermind
 
         static void Start()
         {
-            // 1. Generate random colors
+            // Generate random colors
             Random generator = new Random();
-            int firstNumber = generator.Next(0, 3); // Computer chooses a random number between 0 and 2
-            int secondNumber = generator.Next(0, 3); // Same as ^
-            string firstColor = firstNumber.ToString(); // Convert int to string || Convert random number to a random color
-            string secondColor = secondNumber.ToString();
-            if (firstNumber == 0) // 0 becomes red
+
+            // Create loop to generate random colors
+            int randomIndex = generator.Next(0, 3); // Computer chooses a random number between 0 and 2
+            for (int i = 0; i < 1; i++)
             {
-                firstColor = "red";
+                Console.Write(trueColor[0] = colorArray[randomIndex] + " ");
+                randomIndex = generator.Next(0, 3);
+                Console.WriteLine(trueColor[1] = colorArray[randomIndex]);
             }
-            if (firstNumber == 1) // 1 becomes yellow
+            // Repeat if the game isn't over
+            while (gameOver == false)
             {
-                firstColor = "yellow";
-            }
-            if (firstNumber == 2) // 2 becomes blue
-            {
-                firstColor = "blue";
-            }
-            if (secondNumber == 0) // 0 becomes red
-            {
-                secondColor = "red";
-            }
-            if (secondNumber == 1) // 1 becomes yellow
-            {
-                secondColor = "yellow";
-            }
-            if (secondNumber == 2) // 2 becomes blue
-            {
-                secondColor = "blue";
-            }
-            /* Console.WriteLine(firstColor + " " + secondColor);
-               Used this line to make sure that Random() was working
-               Random() successfully generates two random colors
-            */
-            // 2. Player guesses random colors
-            while (true)
-            {   // loop start
+                Start:
+                // Ask Player to enter  guess
                 Console.WriteLine("> Please enter your guess: ");
-                string guess = Console.ReadLine().ToLower(); // Player's guess
-                string[] words = guess.Split(' '); // Splits guess where space is
-                string firstGuess = words[0]; // first word becomes firstGuess
-                string secondGuess = words[1]; // second word becomes secondGuess
-                /* Console.WriteLine("The first color you guessed was " + firstGuess + " and the second color you guessed was " + secondGuess + ".");
-                   Used this to make sure that the string guess was split into two variables - firstGuess and secondGuess */
-                string[] colorArray = { "red", "yellow", "blue" };
-                if (firstGuess != "red" && firstGuess != "yellow" && firstGuess != "blue" && secondGuess != "red" && secondGuess != "yellow" && secondGuess != "blue")
+                string input = Console.ReadLine().ToLower(); // This takes the Player's input and sets it as a string variable
+                string[] guess = input.Split(' '); // This will split the Player's input anywhere a space occurs
+                // Check guess
+                // If Player's input is not a color from colorArray or is misspelled
+                if (guess[0] != "red" && guess[0] != "yellow" && guess[0] != "blue" && guess[1] != "red" && guess[1] != "yellow" && guess[1] != "blue")
                 {
-                    Console.WriteLine("> You have entered an incorrect response. You can only guess red, yellow, or blue.");
-                    continue;
-                } // This will prevent the player from entering anything that is not red, yellow, or blue
-                // Computer generates two colors, player guess both incorrectly
-                if (firstColor != firstGuess && firstColor != secondGuess && secondColor != firstGuess && secondColor != secondGuess)
-                {
-                    Console.WriteLine("> Hint: 0-0");
+                    Console.WriteLine("> You have entered an incorrect response. Please check your input and try again.");
                     continue;
                 }
-                // Computer generates two colors that are the same, player guesses the first one correctly in the correct position
-                if (firstColor == secondColor && firstColor == firstGuess && firstGuess != secondGuess && secondColor != firstGuess && secondColor != secondGuess)
+                // If Player guesses both colors correctly in the correct positions
+                if (guess[0] == trueColor[0] && guess[1] == trueColor[1])
                 {
-                    Console.WriteLine("> Hint: 0-1");
-                    continue;
+                    Console.WriteLine("> You win!");
+                    gameOver = true; // This will cause the loop to finish
                 }
-                // Computer generates two colors that are the same, player guesses the second one correctly in the correct position
-                if (firstColor == secondColor && firstColor != firstGuess && firstColor != secondGuess && secondColor != firstGuess && secondColor == secondGuess)
+                if (guess[0] != trueColor[0] && guess[0] !=trueColor[1] && guess[1] != trueColor[0] && guess[1] != trueColor[1])
                 {
-                    Console.WriteLine("> Hint: 0-1");
-                    continue;
+                    Console.WriteLine("> Hint: 0-0"); // 0-0 means the Player guessed the colors incorrectly and in the incorrect positions
+                    continue; // This will cause the loop to continue
                 }
-                // Computer generates two colors that are not the same, player guesses the first one correctly in the wrong position
-                if (firstColor != secondColor && firstColor != firstGuess && firstColor == secondGuess && secondColor != firstGuess && secondColor != secondGuess)
+                if (trueColor[0] == trueColor[1]) // If the two colors randomly generated are the same
                 {
-                    Console.WriteLine("> Hint: 1-0");
-                    continue;
+                    if (guess[0] == trueColor[0] && guess[0] != trueColor[1] && guess[1] != trueColor[0] && guess[1] != trueColor[1])
+                    {
+                        Console.WriteLine("> Hint: 0-1"); // Player guessed the first trueColor in the correct position
+                        goto Start;
+                    }
+                    if (guess[0] != trueColor[0] && guess[0] != trueColor[1] && guess[1] != trueColor[0] && guess[1] == trueColor[1])
+                    {
+                        Console.WriteLine("> Hint: 0-1"); // Player guessed the second trueColor in the correct position
+                        goto Start;
+                    }
                 }
-                // Computer generates two colors that are not the same, player guesses the second one correctly in the wrong position
-                if (firstColor != secondColor && firstColor != firstGuess && firstColor != secondGuess && secondColor == firstGuess && secondColor != secondGuess)
+                if (trueColor[0] != trueColor[1]) // If the two colors randomly generated are not the same
                 {
-                    Console.WriteLine("> Hint: 1-0");
-                    continue;
+                    if (guess[0] != trueColor[0] && guess[1] == trueColor[0] && guess[0] != trueColor[1] && guess[1] != trueColor[1])
+                    {
+                        Console.WriteLine("> Hint: 1-0"); // Player guessed the first trueColor in wrong position
+                        goto Start;
+                    }
+                    if (guess[0] != trueColor[0] && guess[1] != trueColor[0] && guess[0] == trueColor[1] && guess[1] != trueColor[1])
+                    {
+                        Console.WriteLine("> Hint: 1-0"); // Player guessed the second trueColor in wrong position
+                        goto Start;
+                    }
+                    if (guess[0] == trueColor[0] && guess[1] != trueColor[0] && guess[0] != trueColor[1] && guess[1] != trueColor[1])
+                    {
+                        Console.WriteLine("> Hint: 0-1"); // Player guessed the first trueColor in the correct position
+                        goto Start;
+                    }
+                    if (guess[0] != trueColor[0] && guess[1] != trueColor[0] && guess[0] != trueColor[1] && guess[1] == trueColor[1])
+                    {
+                        Console.WriteLine("> Hint: 0-1"); // Player guessed the second trueColor in the correct position
+                        goto Start;
+                    }
+                    if (guess[0] != trueColor[0] && guess[1] == trueColor[0] && guess[0] == trueColor[1] && guess[1] != trueColor[1])
+                    {
+                        Console.WriteLine("> Hint: 2-0"); // Player guessed both trueColors but in the wrong position
+                        goto Start;
+                    }
                 }
-                // Computer generates two colors that are not the same, player guesses the first one correctly in the correct position
-                if (firstColor != secondColor && firstColor == firstGuess && firstColor != secondGuess && secondColor != firstGuess && secondColor != secondGuess)
+            } // End of loop
+
+            Console.WriteLine("> Do you want to play again? Enter Yes or No.");
+            string playAgain = Console.ReadLine().ToLower();
+            while (true)
+            { // Loop start for play again options
+                if (playAgain == "yes")
                 {
-                    Console.WriteLine("> Hint: 0-1");
-                    continue;
+                    Start(); // Game starts over again
                 }
-                // Computer generates two colors that are not the same, player guesses the second one correctly in the correct position
-                if (firstColor != secondColor && firstColor != firstGuess && firstColor != secondGuess && secondColor != firstGuess && secondColor == secondGuess)
+                if (playAgain == "no")
                 {
-                    Console.WriteLine("> Hint: 0-1");
-                    continue;
+                    Environment.Exit(0); // Application closes
                 }
-                // Computer generates two colors that are not the same, player guesses both colors correctly in the wrong positions
-                if (firstColor != secondColor && firstColor != firstGuess && firstColor == secondGuess && secondColor == firstGuess && secondColor != secondGuess)
+                else
                 {
-                    Console.WriteLine("> Hint: 2-0");
-                    continue;
+                    Console.WriteLine("> You did not enter a proper response. Please enter Yes or No.");
+                    continue; // Goes to start of loop to get proper response
                 }
-                // Player guesses both colors correctly
-                if (firstColor == firstGuess && secondColor == secondGuess)
-                {
-                    Console.WriteLine("> You won! :D");
-                    Console.WriteLine("> Do you want to play again? Enter Yes or No.");
-                    string playAgain = Console.ReadLine().ToLower();
-                    while (true)
-                    { // loop start for play again options
-                        if (playAgain == "yes")
-                        {
-                            Start(); // game starts over again
-                        }
-                        if (playAgain == "no")
-                        {
-                            Environment.Exit(0); // application closes
-                        }
-                        else
-                        {
-                            Console.WriteLine("> You did not enter a proper response. Please enter Yes or No.");
-                            continue; // goes to start of loop to get proper response
-                        }
-                    } // loop end for play again options
-                }
-            } // end of loop
-        }        
+            } // End of loop for play again options
+        }
     }
 }
