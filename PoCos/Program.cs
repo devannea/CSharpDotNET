@@ -11,9 +11,10 @@ namespace PoCos
         public static void Main()
         {
             DriversLicense MyDriversLicense = new DriversLicense();
-            MyDriversLicense.GetFullName("Devanne Aceves");
-
-            Console.WriteLine(MyDriversLicense.GetFullName + " " + MyDriversLicense.GetGender + " " + MyDriversLicense.GetLicenseNumber);
+            MyDriversLicense.GetFullName = "Devanne Aceves";
+            MyDriversLicense.GetGender = "Female";
+            MyDriversLicense.GetLicenseNumber = 4204204;
+            Console.WriteLine();
             Console.WriteLine();
             Console.Read();
         }
