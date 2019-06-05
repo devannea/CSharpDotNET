@@ -11,7 +11,7 @@ namespace PoCos
         public static void Main()
         {
 
-            DriversLicense myDriversLicense = new DriversLicense("Devanne Aceves", "Female", "5423673");
+            DriversLicense myDriversLicense = new DriversLicense();
             Book myBook = new Book();
             Airplane myPlane = new Airplane();
             Console.Read();
@@ -24,11 +24,18 @@ namespace PoCos
         public String Gender { get; set; }
         public String LicenseNumber { get; set; }
 
+        public DriversLicense()
+        {
+            FullName = "Jane Doe";
+            Gender = "F";
+            LicenseNumber = "1234567";
+        }
+
         public DriversLicense(string fullName, string gender, string licenseNumber)
         {
-            fullName = FullName;
-            gender = Gender;
-            licenseNumber = LicenseNumber;
+            FullName = fullName;
+            Gender = gender;
+            LicenseNumber = licenseNumber;
         }
 
     }
@@ -54,12 +61,12 @@ namespace PoCos
 
         public Book(string title, List<string> authors, int pages, string sku, string publisher, double price)
         {
-            title = Title;
-            authors = Authors;
-            pages = NumberOfPages;
-            sku = SKU;
-            publisher = Publisher;
-            price = Price;
+            Title = title;
+            Authors = authors;
+            NumberOfPages = pages;
+            SKU = sku;
+            Publisher = publisher;
+            Price = price;
         }
     }
 
@@ -82,11 +89,11 @@ namespace PoCos
 
         public Airplane(string manufacturer, string model, string variant, int capacity, int engines)
         {
-            manufacturer = Manufacturer;
-            model = Model;
-            variant = Variant;
-            capacity = Capacity;
-            engines = Engines;
+            Manufacturer = manufacturer;
+            Model = model;
+            Variant = variant;
+            Capacity = capacity;
+            Engines = engines;
         }
     }
 }
