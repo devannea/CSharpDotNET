@@ -14,8 +14,6 @@ namespace ToDoList
             Console.WriteLine("ToDoList");
             Console.WriteLine("Would you like to add an item (Yes/No)?");
             userInput = Console.ReadLine();
-            Console.ReadLine();
-
             List<ToDoItem> ToDoList = new List<ToDoItem>();
             while (userInput != "no")
             {
@@ -35,6 +33,7 @@ namespace ToDoList
             foreach (ToDoItem item in ToDoList)
             {
                 // print out list items
+                Console.WriteLine(item);
             }
             Console.ReadKey();
         }
