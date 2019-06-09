@@ -8,31 +8,47 @@ namespace TowerHanoi
 {
     class Program
     {
+        public static Dictionary<string, Stack<int>> Board = new Dictionary<string, Stack<int>>(); // Dictionary
+        public static Stack<int> rowA = new Stack<int>(); // Peg A
+        public static Stack<int> rowB = new Stack<int>(); // Peg B
+        public static Stack<int> rowC = new Stack<int>(); // Peg C
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to the Towers of Hanoi!");
-            Start();
+            int i = 4;
+            while (i > 0)
+            {
+                rowA.Push(i);
+                --i;
+            }
+            Board.Add("A:", rowA);
+            Board.Add("B:", rowB);
+            Board.Add("C:", rowC);
             PrintBoard();
             Console.Read();
         }
-
-        static void Start()
+        public static void PrintBoard()
         {
-            PrintBoard();
-            Console.WriteLine("Choose the disc you'd like to move first.");
-            int discChoice = int.Parse(Console.ReadLine());
-            if (discChoice != 1 && discChoice != 2 && discChoice != 3 && discChoice != 4)
+            Console.WriteLine("Welcome to Towers of Hanoi!");
+            Console.WriteLine(" ");
+            Console.WriteLine("Instructions:");
+            Console.WriteLine("The disks are labelled 1 to 4,");
+            Console.WriteLine("with 1 being the smallest and 4 being the largest.");
+            Console.WriteLine("Your goal is to move all of the disks from Peg A to Peg C,");
+            Console.WriteLine("in the same order they are in now: 4 3 2 1");
+            Console.WriteLine(" ");
+            Console.WriteLine("Remember:");
+            Console.WriteLine("**You cannot place a larger disk on top of a smaller disk**");
+            Console.WriteLine(" ");
+            foreach (KeyValuePair<string, Stack<int>> column in Board)
             {
-                Console.WriteLine("You have entered an incorrect response. Please check your input and try again.");
+                string colLabel = string.Empty;
+                foreach (int disk in column.Value.Reverse())
+                {
+                    colLabel += disk + " ";
+                }
+                Console.WriteLine("{0}: {1}", column.Key[0], colLabel);
             }
-            Console.WriteLine("You have selected " + discChoice);
-        }
-
-        static void PrintBoard()
-        {
-            Console.WriteLine("A: 4 3 2 1 ");
-            Console.WriteLine("B:         ");
-            Console.WriteLine("C:         ");
+            Console.WriteLine("");
         }
     }
 }
