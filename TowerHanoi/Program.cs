@@ -30,9 +30,9 @@ namespace TowerHanoi
 
         static void PrintBoard()
         {
-            Console.WriteLine("A: {4} {3} {2} {1}");
-            Console.WriteLine("B: { }");
-            Console.WriteLine("C: { }");
+            Console.WriteLine("A: 4 3 2 1 ");
+            Console.WriteLine("B:         ");
+            Console.WriteLine("C:         ");
         }
     }
 }
