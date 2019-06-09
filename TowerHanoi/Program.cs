@@ -13,6 +13,7 @@ namespace TowerHanoi
         public static Stack<int> rowA = new Stack<int>(); // Peg A
         public static Stack<int> rowB = new Stack<int>(); // Peg B
         public static Stack<int> rowC = new Stack<int>(); // Peg C
+        public static int moves = 0; // Keep track of how many moves the player makes
         static void Main(string[] args)
         {
             int i = 4;
@@ -26,6 +27,8 @@ namespace TowerHanoi
             Board.Add("C:", rowC);
             while (GameLogic(StartingPeg, EndingPeg) == false)
             {
+                Console.WriteLine("Moves - " + moves);
+                Console.WriteLine(" ");
                 PrintBoard();
                 Console.WriteLine(" ");
                 Console.WriteLine("Which row do you want to move the top piece from?");
@@ -89,6 +92,7 @@ namespace TowerHanoi
             {
                 if (Board[StartingPeg].Peek() < Board[EndingPeg].Peek())
                 {
+                    ++moves;
                     return true;
                 }
                 else
@@ -98,6 +102,7 @@ namespace TowerHanoi
             }
             else
             {
+                ++moves;
                 return true;
             }
         }
