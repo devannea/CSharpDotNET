@@ -9,6 +9,7 @@ namespace TowerHanoi
     class Program
     {
         public static Dictionary<string, Stack<int>> Board = new Dictionary<string, Stack<int>>(); // Dictionary
+        public static string StartingPeg, EndingPeg; // Player will choose to move a disk from StartingPeg to EndingPeg
         public static Stack<int> rowA = new Stack<int>(); // Peg A
         public static Stack<int> rowB = new Stack<int>(); // Peg B
         public static Stack<int> rowC = new Stack<int>(); // Peg C
@@ -23,6 +24,15 @@ namespace TowerHanoi
             Board.Add("A:", rowA);
             Board.Add("B:", rowB);
             Board.Add("C:", rowC);
+            while (GameLogic(StartingPeg, EndingPeg) == false)
+            {
+                PrintBoard();
+                Console.WriteLine(" ");
+                Console.WriteLine("Which row do you want to move the top piece from?");
+                StartingPeg = Console.ReadLine().ToUpper();
+                Console.WriteLine("Which row do you want to move the piece from " + StartingPeg + " to?");
+                EndingPeg = Console.ReadLine().ToUpper();
+            }
             PrintBoard();
             Console.Read();
         }
@@ -49,6 +59,58 @@ namespace TowerHanoi
                 Console.WriteLine("{0}: {1}", column.Key[0], colLabel);
             }
             Console.WriteLine("");
+        }
+        public static bool GameLogic(string StartingPeg, string EndingPeg)
+        {
+            if (StartingPeg != null)
+            {
+                bool sameColumn = false;
+                if (StartingPeg == EndingPeg)
+                {
+                    sameColumn = true;
+                }
+                if (sameColumn == false)
+                {
+                    if (LegalMove(StartingPeg, EndingPeg) == true)
+                    {
+                        if (Board[StartingPeg].Count() != 0)
+                        {
+                            Board[EndingPeg].Push(Board[StartingPeg].Pop());
+                        }
+                    }
+                }
+            }
+            Console.Clear();
+            return GameWon();
+        }
+        public static bool LegalMove(string StartingPeg, string EndingPeg) //Check if move is legal
+        {
+            if (Board[StartingPeg].Count() != 0 && Board[EndingPeg].Count() != 0)
+            {
+                if (Board[StartingPeg].Peek() < Board[EndingPeg].Peek())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public static bool GameWon() // Player wins game
+        {
+            if (Board["C"].Count() == 4)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
