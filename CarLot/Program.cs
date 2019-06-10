@@ -10,6 +10,7 @@ namespace CarLot
     {
         static void Main(string[] args)
         {
+            // Main method here
         }
     }
 }
