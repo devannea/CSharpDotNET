@@ -6,6 +6,75 @@ using System.Threading.Tasks;
 
 namespace SuperHeroes
 {
+    public class Person
+    {
+        public Person (string name, string nickname) // Constructor that accepts name and nickname
+        {
+            Name = name;
+            NickName = nickname;
+        }
+        public String Name { get; set; } // Name Property
+        public String NickName { get; set; } // NickName Property
+        public override string ToString() // ToString() Override
+        {
+            return Name; // returns that person's name
+        }
+        public void PrintGreeting() // Print Greeting Method
+        {
+            Console.WriteLine($"Hi, my name is {Name}, you can call me {NickName}.");
+            // Hi, my name is _____, you can call me _____.
+        }
+    }
+    public class SuperHero : Person
+    {
+        public SuperHero(string name, string realname, string superpower) : base(name, nickname:null)
+        // Constructor that takes Name, HeroName, and SuperPower, and passes null to NickName
+        {
+            Name = name; // This would be the superhero name, i.e. Spider-Man
+            RealName = realname; // This would be the real name, i.e. Peter Parker
+            SuperPower = superpower;
+        }
+        public String RealName { get; set; } // RealName Property
+        public String SuperPower { get; set; } // SuperPower Property
+        public new void PrintGreeting() // Override the Print Greeting Method
+        {
+            Console.WriteLine($"I am {RealName}. When I am {Name}, my super power is {SuperPower}!");
+        }
+    }
+    public class Villain : Person
+    {
+        public Villain(string name, string nemesis) : base(name, nickname:null)
+        // Constructor that takes Name and Nemesis of the Villain, and passes null to NickName
+        {
+            Name = name; // This is the villain's name
+            Nemesis = nemesis; // This is the superhero/ nemesis
+        }
+        public String Nemesis { get; set; } // Nemesis Name Property
+        public new void PrintGreeting() // Override the Print Greeting Method
+        {
+            Console.WriteLine($"I am {Name}! Have you seen {Nemesis}?");
+        }
+    }
+    public class Program
+    {
+        // Create a few humans, superheroes, and villains
+        // Add them to a list
+        // Loop through them and print each one's name followed by the greeting
+        public static void Main(String[] args)
+        {
+            List<Person> CharacterList = new List<Person>(); // List of characters
+            CharacterList.Add();
+            //Not sure how to do this part
+        }
+    }
+
+
+
+
+
+
+
+
     //public class Point2D
     //{
     //    public Point2D() // Constructor that creates the point (0, 0)
@@ -119,55 +188,4 @@ namespace SuperHeroes
     //        Console.WriteLine("========");
     //    }
     //}
-
-
-
-    public class Program
-    {
-        public static void Main(String[] args)
-        {
-
-        }
-    }
-
-    class Person
-    {
-        public Person(string name, string nickName)
-        {
-            Name = name;
-            NickName = nickName;
-        }
-        public String Name { get; set; }
-        public String NickName { get; set; }
-        public static void PrintGreeting(string name, string nickName)
-        {
-            Console.WriteLine("Hi, my name is " + name + ", you can call me " + nickName + ".");
-        }
-    }
-    class SuperHero
-    {
-        public SuperHero(string realName, string superPower)
-        {
-            RealName = realName;
-            SuperPower = superPower;
-        }
-        public String RealName { get; set; }
-        public String SuperPower { get; set; }
-        public static void PrintGreeting(string realName, string superPower)
-        {
-            Console.WriteLine("I am " + realName + ". When I am Mr. Incredible, my super power is " + superPower + "!");
-        }
-    }
-    class Villain
-    {
-        public Villain(string nemesis)
-        {
-            Nemesis = nemesis;
-        }
-        public String Nemesis { get; set; }
-        public static void PrintGreeting(string nemesis)
-        {
-            Console.WriteLine("I am " + nemesis + ", have you seen " + "?");
-        }
-    }
 }
