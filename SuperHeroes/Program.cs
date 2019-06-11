@@ -8,34 +8,72 @@ namespace SuperHeroes
 {
     public class Point2D
     {
-        public Point2D()
+        public Point2D() // Constructor that creates the point (0, 0)
         {
-            
+            X = 0;
+            Y = 0;
         }
-        public int X { get; set; }
-        public int Y { get; set; }
-        public Point2D(int x, int y)
+        public Point2D(int x, int y) // Constructor that creates a point by taking x and y (x, y) => (X, Y)
         {
             X = x;
             Y = y;
         }
-
-        // your code here 
-
+        public int X { get; set; } // X Property
+        public int Y { get; set; } // Y Property
+        public override string ToString() // ToString() Override
+        {
+            X = 7;
+            Y = 5;
+            return "Origin: (" + X + ", " + Y + ")"; // returns Origin: (7, 5)
+        }
+        public override bool Equals (Object o) // Equals (Object o) Override
+        {
+            if(o.GetType().Equals(GetType()))
+            // if(o is Point2D)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
     public class Point3D : Point2D
     {
         public Point3D()
         {
-            // your code here
+            X = 0;
+            Y = 0;
+            Z = 0;
         }
         public Point3D(int x, int y, int z) : base(x, y)
         {
-            // your code here
+            X = x;
+            Y = y;
+            Z = z;
         }
-
-        // your code here
+        public int Z { get; set; } // Z Property
+        public override string ToString() // ToString() Override
+        {
+            X = 7;
+            Y = 5;
+            Z = 12;
+            return "Origin: (" + X + ", " + Y + ", " + Z + ")"; // returns Origin: (7, 5, 12)
+        }
+        public override bool Equals(Object o) // Equals (Object o) Override
+        {
+            if (o.GetType().Equals(GetType()))
+            // if(o is Point2D)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
     public class Program
