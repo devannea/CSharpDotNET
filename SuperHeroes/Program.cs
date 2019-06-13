@@ -19,9 +19,9 @@ namespace SuperHeroes
         {
             return Name; // returns that person's name
         }
-        public void PrintGreeting() // Print Greeting Method
+        public virtual string PrintGreeting() // Print Greeting Method
         {
-            Console.WriteLine($"Hi, my name is {Name}, you can call me {NickName}.");
+            return $"Hi, my name is {Name}, you can call me {NickName}.";
             // Hi, my name is _____, you can call me _____.
         }
     }
@@ -36,9 +36,9 @@ namespace SuperHeroes
         }
         public String RealName { get; set; } // RealName Property
         public String SuperPower { get; set; } // SuperPower Property
-        public new void PrintGreeting() // Override the Print Greeting Method
+        public override string PrintGreeting() // Override the Print Greeting Method
         {
-            Console.WriteLine($"I am {RealName}. When I am {Name}, my super power is {SuperPower}!");
+            return $"I am {RealName}. When I am {Name}, my super power is {SuperPower}!";
         }
     }
     public class Villain : Person
@@ -50,9 +50,9 @@ namespace SuperHeroes
             Nemesis = nemesis; // This is the superhero/ nemesis
         }
         public String Nemesis { get; set; } // Nemesis Name Property
-        public new void PrintGreeting() // Override the Print Greeting Method
+        public override string PrintGreeting() // Override the Print Greeting Method
         {
-            Console.WriteLine($"I am {Name}! Have you seen {Nemesis}?");
+            return $"I am {Name}! Have you seen {Nemesis}?";
         }
     }
     public class Program
@@ -62,9 +62,17 @@ namespace SuperHeroes
         // Loop through them and print each one's name followed by the greeting
         public static void Main(String[] args)
         {
-            List<Person> CharacterList = new List<Person>(); // List of characters
-            CharacterList.Add();
-            //Not sure how to do this part
+            Person civilian = new Person("William", "Bill");
+            SuperHero hero = new SuperHero("Mr. Incredible", "super strength", "Wade Turner");
+            Villain villain = new Villain("The Joker", "Batman");
+
+            Console.WriteLine($"{civilian.ToString()}: {civilian.PrintGreeting()}");
+            // return William: Hi, my name is William, you can call me Bill.
+            Console.WriteLine($"{hero.ToString()}: {hero.PrintGreeting()}");
+            // return Mr. Incredible: I am Wade Turner. When I am Mr. Incredible, my super power is super strength!
+            Console.WriteLine($"{villain.ToString()}: {villain.PrintGreeting()}");
+            // return Joker: I am The Joker! Have you seen Batman?
+            Console.Read();
         }
     }
 
