@@ -36,7 +36,6 @@ namespace Mastermind
             // Repeat if the game isn't over
             while (gameOver == false)
             {
-                Start:
                 // Ask Player to enter  guess
                 Console.WriteLine("> Please enter your guess: ");
                 string input = Console.ReadLine().ToLower(); // This takes the Player's input and sets it as a string variable
