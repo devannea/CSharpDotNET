@@ -16,7 +16,6 @@ namespace MasterMind_Guided
     }
     class MasterMind
     {
-        // pretty sweet bruhh
         static string[] colors = new string[] { "red", "yellow", "blue" };
         static string color1;
         static string color2;
