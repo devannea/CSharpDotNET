@@ -36,7 +36,7 @@ namespace Mastermind
             // Repeat if the game isn't over
             while (gameOver == false)
             {
-                // Ask Player to enter  guess
+                // Ask Player to enter  guess 
                 Console.WriteLine("> Please enter your guess: ");
                 string input = Console.ReadLine().ToLower(); // This takes the Player's input and sets it as a string variable
                 string[] guess = input.Split(' '); // This will split the Player's input anywhere a space occurs
