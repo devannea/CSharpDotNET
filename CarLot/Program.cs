@@ -21,7 +21,7 @@ namespace CarLot
             return $"{Vehicles}"; // sort this out later
         }
     }
-    abstract class Vehicle // abstract Vehicle class *Note: You cannot make instances of abstract classes
+    abstract class Vehicle // abstract Vehicle class **Note: You cannot make instances of abstract classes
     {
         public String LicenseNumber { get; set; } // License Number Property
         public String Make { get; set; } // Make Property
