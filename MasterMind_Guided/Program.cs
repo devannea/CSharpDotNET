@@ -10,13 +10,13 @@ namespace MasterMind_Guided
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to MasterMind the Game!");
-
+            MasterMind.play();
+            Console.Read();
         }
     }
     class MasterMind
     {
-        // easiest way possible
+        // pretty sweet bruhh
         static string[] colors = new string[] { "red", "yellow", "blue" };
         static string color1;
         static string color2;
@@ -35,17 +35,51 @@ namespace MasterMind_Guided
             int colorsCorrect = 0;
             int positionsCorrect = 0;
             // Check if color1 is contained in guess
-
             if (guess.Contains(color1)) colorsCorrect++;
 
             // Check if color2 is contained in guess
             if (guess.Contains(color2)) colorsCorrect++;
 
-            // Check if color1 is in correct position
             string[] guessArray = guess.Split(' ');
+
+            // Check if color1 is in correct position
             if (guessArray[0] == color1) positionsCorrect++;
+            
             // Check if color2 is in correct position
-            if (guessArray[2] == color1) 
+            if (guessArray[1] == color2) positionsCorrect++;
+            
+            // Check if entire guess is correct
+            if (positionsCorrect == 2 && colorsCorrect == 2)
+            {
+                return true;
+            }
+            else
+            {
+                Console.WriteLine($"Your hint is {colorsCorrect}-{positionsCorrect}");
+                return false;
+            }
+        }
+
+        // Loop until checkGuess returns true
+        public static void play()
+        {
+            pickColors();
+            Console.WriteLine("Welcome to MasterMind the Game!");
+            Console.WriteLine("Game Instructions:");
+            Console.WriteLine("The computer will choose 2 colors at random: red, yellow, or blue.");
+            Console.WriteLine("The computer can choose the same color twice.");
+            Console.WriteLine("You will try to guess the colors chosen.");
+            Console.WriteLine("");
+            while(true)
+            {
+                Console.WriteLine("Please enter your guess:");
+                var userGuess = Console.ReadLine();
+                if (checkGuess(userGuess))
+                {
+                    Console.WriteLine("You won! Good job!");
+                    break;
+                }
+            }
         }
     }
 }

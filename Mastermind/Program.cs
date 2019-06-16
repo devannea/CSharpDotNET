@@ -63,12 +63,12 @@ namespace Mastermind
                     if (guess[0] == trueColor[0] && guess[0] != trueColor[1] && guess[1] != trueColor[0] && guess[1] != trueColor[1])
                     {
                         Console.WriteLine("> Hint: 0-1"); // Player guessed the first trueColor in the correct position
-                        goto Start;
+                        break;
                     }
                     if (guess[0] != trueColor[0] && guess[0] != trueColor[1] && guess[1] != trueColor[0] && guess[1] == trueColor[1])
                     {
                         Console.WriteLine("> Hint: 0-1"); // Player guessed the second trueColor in the correct position
-                        goto Start;
+                        break;
                     }
                 }
                 if (trueColor[0] != trueColor[1]) // If the two colors randomly generated are not the same
@@ -76,27 +76,27 @@ namespace Mastermind
                     if (guess[0] != trueColor[0] && guess[1] == trueColor[0] && guess[0] != trueColor[1] && guess[1] != trueColor[1])
                     {
                         Console.WriteLine("> Hint: 1-0"); // Player guessed the first trueColor in wrong position
-                        goto Start;
+                        break;
                     }
                     if (guess[0] != trueColor[0] && guess[1] != trueColor[0] && guess[0] == trueColor[1] && guess[1] != trueColor[1])
                     {
                         Console.WriteLine("> Hint: 1-0"); // Player guessed the second trueColor in wrong position
-                        goto Start;
+                        break;
                     }
                     if (guess[0] == trueColor[0] && guess[1] != trueColor[0] && guess[0] != trueColor[1] && guess[1] != trueColor[1])
                     {
                         Console.WriteLine("> Hint: 0-1"); // Player guessed the first trueColor in the correct position
-                        goto Start;
+                        break;
                     }
                     if (guess[0] != trueColor[0] && guess[1] != trueColor[0] && guess[0] != trueColor[1] && guess[1] == trueColor[1])
                     {
                         Console.WriteLine("> Hint: 0-1"); // Player guessed the second trueColor in the correct position
-                        goto Start;
+                        break;
                     }
                     if (guess[0] != trueColor[0] && guess[1] == trueColor[0] && guess[0] == trueColor[1] && guess[1] != trueColor[1])
                     {
                         Console.WriteLine("> Hint: 2-0"); // Player guessed both trueColors but in the wrong position
-                        goto Start;
+                        break;
                     }
                 }
             } // End of loop
