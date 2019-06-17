@@ -27,11 +27,10 @@ namespace SuperHeroes
     }
     public class SuperHero : Person
     {
-        public SuperHero(string name, string realname, string superpower) : base(name, nickname:null)
+        public SuperHero(string name, string realname, string superpower) : base(name, null)
         // Constructor that takes Name, HeroName, and SuperPower, and passes null to NickName
         {
-            Name = name; // This would be the superhero name, i.e. Spider-Man
-            RealName = realname; // This would be the real name, i.e. Peter Parker
+            RealName = realname; // This would be the real name, i.e. Peter Parker or Clark Kent
             SuperPower = superpower;
         }
         public String RealName { get; set; } // RealName Property
@@ -43,10 +42,9 @@ namespace SuperHeroes
     }
     public class Villain : Person
     {
-        public Villain(string name, string nemesis) : base(name, nickname:null)
+        public Villain(string name, string nemesis) : base(name, null)
         // Constructor that takes Name and Nemesis of the Villain, and passes null to NickName
         {
-            Name = name; // This is the villain's name
             Nemesis = nemesis; // This is the superhero/ nemesis
         }
         public String Nemesis { get; set; } // Nemesis Name Property
@@ -129,8 +127,6 @@ namespace SuperHeroes
     //    }
     //    public Point3D(int x, int y, int z) : base(x, y)
     //    {
-    //        X = x;
-    //        Y = y;
     //        Z = z;
     //    }
     //    public int Z { get; set; } // Z Property
