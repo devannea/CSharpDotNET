@@ -24,38 +24,62 @@ namespace Inventory
         void GetDailyRate();
         void GetDescription();
     }
-    public class Boat : IRentable // extend IRentable interface
+    public class Boat : IRentable // what is this error even about?
     {
         // internally store an hourly rate
-        private decimal _hourlyRate = 12.5m;
-        public void GetDailyRate(decimal _hourlyRate)
+        private decimal _hourlyRate = 12.5m; // why is this 12.5m? what is m? is 12.5 just a placeholder/ example
+        public Decimal GetDailyRate()
         {
-            return decimal.Round(_hourlyRate * 24, 2);
+            return decimal.Round(_hourlyRate * 24, 2); // _hourlyRate * 24 = DailyRate, rounded to 2 decimal places
         }
-        public void GetDescription(string description)
-        {
-            return Description;
-        }
+        public String Description { get; set; }
         public Boat(string description)
         {
             Description = description;
         }
-        public String Description { get; set; }
-    }
-    public class House : IRentable // extend IRentable interface
-    {
-        // internally store a weekly rate
-        private decimal _weeklyRate = ;
-        public House()
+        public String GetDescription()
         {
-            // code goes here
+            return Description;
         }
     }
-    public class Car : IRentable // extend IRentable interface
+    public class House : IRentable
     {
-        public Car()
+        // internally store a weekly rate
+        private decimal _weeklyRate = 1200m;
+        public Decimal GetDailyRate()
         {
-            // code goes here
+            return decimal.Round(_weeklyRate / 168, 2); // _weeklyRate / 168 = DailyRate, rounded to 2 decimal places
+        }
+        public String Description { get; set; }
+        public House(string description)
+        {
+            Description = description;
+        }
+        public String GetDescription()
+        {
+            return Description;
+        }
+    }
+    public class Car : IRentable
+    {
+        public Decimal DailyRate { get; set; }
+        public Car(decimal _dailyRate)
+        {
+            DailyRate = _dailyRate;
+        }
+        public Decimal GetDailyRate()
+        {
+            return DailyRate; // 
+        }
+        public String Description { get; set; }
+
+        public Car(string description)
+        {
+            Description = description;
+        }
+        public String GetDescription()
+        {
+            return Description;
         }
     }
 }
