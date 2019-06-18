@@ -14,35 +14,38 @@ namespace Inventory
             // add them to a single list
             // loop through list and print the description, type, and daily rate for each element
             List<IRentable> rentables = new List<IRentable>();
-            rentables.Add(new Boat($"what do i put here")); // like i know that strings go there but like ???
-            rentables.Add(new House($"and here"));
-            rentables.Add(new Car($"and here???"));
-
+            rentables.Add(new Boat("sonic speed", 25)); // like i know that strings go there but like ???
+            rentables.Add(new House("Two-story murder trap", 50));
+            rentables.Add(new Car("used, but in good condition", 45));
+            
             foreach(IRentable rentable in rentables) // is this even right?
             {
-                rentable.GetDescription();
-                rentable.GetDailyRate();
+                string desc = rentable.GetDescription();
+                decimal deci = rentable.GetDailyRate();
+                Console.WriteLine($"Description: {desc}; Daily Rate: ${deci}");
             }
+            Console.Read();
         }
     }
     public interface IRentable
     {
-        void GetDescription();
-        void GetDailyRate();
+        string GetDescription();
+        decimal GetDailyRate();
     }
-    public class Boat : IRentable // what is this error even about?
+    public class Boat : IRentable
     {
-        public String Description { get; set; }
-        public Boat(string description)
+        private String _description { get; set; }
+        private decimal _hourlyRate = 12.5m;
+        public Boat(string description, decimal dailyRate)
         {
-            Description = description;
+            _description = description;
+            _hourlyRate = dailyRate;
         }
         public String GetDescription()
         {
-            return Description;
+            return _description;
         }
         // internally store an hourly rate
-        private decimal _hourlyRate = 12.5m; // why is this 12.5m? what is m? is 12.5 just a placeholder/ example
         public Decimal GetDailyRate()
         {
             return decimal.Round(_hourlyRate * 24, 2); // _hourlyRate * 24 = DailyRate, rounded to 2 decimal places
@@ -50,17 +53,18 @@ namespace Inventory
     }
     public class House : IRentable
     {
-        public String Description { get; set; }
-        public House(string description)
+        public String _description { get; set; }
+        private decimal _weeklyRate = 1200m;
+        public House(string description, decimal dailyRate)
         {
-            Description = description;
+            _description = description;
+            _weeklyRate = dailyRate;
         }
         public String GetDescription()
         {
-            return Description;
+            return _description;
         }
         // internally store a weekly rate
-        private decimal _weeklyRate = 1200m;
         public Decimal GetDailyRate()
         {
             return decimal.Round(_weeklyRate / 7, 2); // _weeklyRate / 7 = DailyRate, rounded to 2 decimal places
@@ -68,24 +72,21 @@ namespace Inventory
     }
     public class Car : IRentable
     {
-        public String Description { get; set; }
+        public String _description { get; set; }
 
-        public Car(string description)
+        public Car(string description, decimal dailyRate)
         {
-            Description = description;
+            _description = description;
+            _dailyRate = dailyRate;
         }
         public String GetDescription()
         {
-            return Description;
+            return _description;
         }
-        public Decimal DailyRate { get; set; }
-        public Car(decimal _dailyRate)
-        {
-            DailyRate = _dailyRate;
-        }
+        public Decimal _dailyRate { get; set; }
         public Decimal GetDailyRate()
         {
-            return DailyRate; // yes? no?
+            return _dailyRate; // yes? no?
         }
     }
 }
