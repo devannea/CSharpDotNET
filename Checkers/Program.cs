@@ -21,14 +21,25 @@ namespace Checkers
 
     public class Checker
     {
-        public String symbol { get; private set; }
-        public Color team { get; private set; }
-        public Position position { get; set; }
-
+        // Properties:
+        public String Symbol { get; private set; } // open or a closed dot
+        public Color Team { get; private set; } // team name (either "white" or "black")
+        public Position Position { get; set; } // coordinates of its place on the grid
+        // Constructor:
         public Checker(Color team, int row, int col)
         {
-            // ...  
+            Team = team;
+            //Position = 
         }
+        int openCircleId = int.Parse("25CB", System.Globalization.NumberStyles.HexNumber);
+        string openCircle = char.ConvertFromUtf32(openCircleId);
+
+        //Console.WriteLine(openCircle);
+
+        int closedCircleId = int.Parse("25CF", System.Globalization.NumberStyles.HexNumber);
+        string closedCircle = char.ConvertFromUtf32(closedCircleId);
+
+        //Console.WriteLine(closedCircle);
 
     }
 
@@ -122,7 +133,7 @@ namespace Checkers
             }
             foreach (Checker c in board.checkers)
             {
-                grid[c.position.row][c.position.col] = c.symbol;
+                grid[c.Position.row][c.Position.col] = c.Symbol;
             }
 
             Console.WriteLine("  0 1 2 3 4 5 6 7");
