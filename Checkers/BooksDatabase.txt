@@ -1,0 +1,41 @@
+﻿Microsoft Windows [Version 10.0.17763.557]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\sqlite>sqlite3 BooksDatabase
+SQLite version 3.28.0 2019-04-16 19:49:53
+Enter ".help" for usage hints.
+sqlite> CREATE TABLE books (
+   ...> id int,
+   ...> title varchar(20),
+   ...> author varchar(20)
+   ...> );
+sqlite> INSERT INTO books (id, title, author) VALUES
+   ...> (1, 'The Hobbit', 'Tolkien');
+sqlite> INSERT INTO books (id, title, author) VALUES
+   ...> (2, 'The Cat in the Hat', 'Dr. Suess');
+sqlite> INSERT INTO books (id, title, author) VALUES
+   ...> (3, 'Tom Sawyer', 'Mark Twain');
+sqlite> SELECT * FROM books;
+1|The Hobbit|Tolkien
+2|The Cat in the Hat|Dr. Suess
+3|Tom Sawyer|Mark Twain
+sqlite> SELECT * FROM books WHERE id = 2;
+2|The Cat in the Hat|Dr. Suess
+sqlite> SELECT title FROM books;
+The Hobbit
+The Cat in the Hat
+Tom Sawyer
+sqlite> UPDATE books SET author = 'J. R. R. Tolkien' WHERE id = 1;
+sqlite> SELECT * FROM books;
+1|The Hobbit|J. R. R. Tolkien
+2|The Cat in the Hat|Dr. Suess
+3|Tom Sawyer|Mark Twain
+sqlite> DELETE FROM books WHERE id = 2;
+sqlite> SELECT * FROM books;
+1|The Hobbit|J. R. R. Tolkien
+3|Tom Sawyer|Mark Twain
+sqlite> UPDATE books SET id = 2 WHERE id = 3;
+sqlite> SELECT * FROM books;
+1|The Hobbit|J. R. R. Tolkien
+2|Tom Sawyer|Mark Twain
+sqlite>
