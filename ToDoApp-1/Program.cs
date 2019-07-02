@@ -11,50 +11,27 @@ namespace ToDoApp_1
     {
         static void Main(string[] args)
         {
-
-        }
-        
-    }
-    class Controller
-    {
-        // the brains the manages all the rules and coordinates the user interactions and the "database" interactions
-    }
-    class ItemRepository // CRUD
-    {
-        private List<ToDoItem> _db; // _db for data base :O
-        public ItemRepository()
-        {
-            _db = new List<ToDoItem>();
-        }
-        public int Create(ToDoItem item)
-        {
-            return 0;
-        }
-        public ToDoItem Read(int id)
-        {
-            return new ToDoItem();
-        }
-        public void Update(ToDoItem item)
-        {
-            //
-        }
-        public void Delete(int id)
-        {
-            //
-        }
-        public List<ToDoItem> ReadAll()
-        {
-            return _db;
-        }
-    }
-    class ConsoleUtils
-    {
-
-    }
-    class ToDoItem
-    {
-        public string Description { get; set; } // Description Property
-        public int Id { get; set; } // ID Property 
-        public bool Done { get; set; } // Flag Property
+            ItemContext context = new ItemContext();
+            context.Database.EnsureCreated();
+            Console.WriteLine("Enter the task description and completion status.");
+            Console.WriteLine("If the task is complete, then the completion status is 'done',");
+            Console.WriteLine("If the task is incomplete, then the completion status is 'not done'.");
+            Console.WriteLine("Use a comma and a space to separate these two,");
+            Console.WriteLine("Example: task description, done");
+            string taskDetails = Console.ReadLine();
+            string[] parts = taskDetails.Split(", ");
+            ToDoItem newToDoItem = new ToDoItem(parts[0], parts[1]);
+            if (parts.Length == 2)
+            {
+                ToDoItem newToDoItem = new ToDoItem(parts[0], parts[1]);
+                context.ToDoItem.Add(newToDoItem);
+                context.SaveChanges();
+                Console.WriteLine("Added the task.");
+            }
+            else
+            {
+                Console.WriteLine("Invalid entry, did not add task");
+            }
+        }   
     }
 }
