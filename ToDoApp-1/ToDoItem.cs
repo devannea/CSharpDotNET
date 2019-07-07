@@ -9,13 +9,13 @@ namespace ToDoApp_1
 {
     class ToDoItem
     {
-        public int Id { get; private set; } // ID Property 
-        public string Description { get; set; } // Description Property
-        public string Status { get; set; } // Flag Property
-        public ToDoItem(string Description, string Status)
+        public long Id { get; set; }
+        public string Description { get; set; }
+        public bool Status { get; set; }
+
+        public ToDoItem(string description)
         {
-            this.Description = Description;
-            this.Status = Status;
+            Description = description;
         }
     }
 }

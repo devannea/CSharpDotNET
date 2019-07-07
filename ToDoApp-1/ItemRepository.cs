@@ -9,45 +9,59 @@ namespace ToDoApp_1
 {
     class ItemRepository // CRUD
     {
-        ItemContext context;
+        private ItemContext _context;
+
         public ItemRepository()
         {
-            context = new ItemContext();
-            context.Database.EnsureCreated();
+            _context = new ItemContext();
         }
-        public List<ToDoItem> GetToDoItems()
-        {
-            IEnumerable<ToDoItem> list = context.ToDoItems;
-            return list.ToList();
-        }
-        public void AddItem(string description, string status)
-        {
 
+        public List<ToDoItem> GetAll()
+        {
+            List<ToDoItem> items = _context.ToDos.ToList();
+            return items;
         }
-        //private List<ToDoItem> _db; // _db for data base :O
-        //public ItemRepository()
-        //{
-        //    _db = new List<ToDoItem>();
-        //}
-        //public int Create(ToDoItem item)
-        //{
-        //    return 0;
-        //}
-        //public ToDoItem Read(int id)
-        //{
-        //    return new ToDoItem();
-        //}
-        //public void Update(ToDoItem item)
-        //{
-        //    //
-        //}
-        //public void Delete(int id)
-        //{
-        //    //
-        //}
-        //public List<ToDoItem> ReadAll()
-        //{
-        //    return _db;
-        //}
+
+        public List<ToDoItem> GetPending()
+        {
+            List<ToDoItem> items = _context.ToDos.Where(x => !x.Status).ToList();
+            return items;
+        }
+
+        public List<ToDoItem> GetDone()
+        {
+            List<ToDoItem> items = _context.ToDos.Where(x => x.Status).ToList();
+            return items;
+        }
+
+        public ToDoItem Get(long id)
+        {
+            ToDoItem item = _context.ToDos.FirstOrDefault(x => x.Id == id);
+            return item;
+        }
+
+        public void Delete(long id)
+        {
+            ToDoItem item = Get(id);
+            _context.Remove(item);
+            _context.SaveChanges();
+        }
+
+        public void Add(ToDoItem item)
+        {
+            _context.Add(item);
+            _context.SaveChanges();
+        }
+
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
+
+        public bool IsValidId(int id)
+        {
+            bool isValid = _context.ToDos.Any(x => x.Id == id);
+            return isValid;
+        }
     }
 }
